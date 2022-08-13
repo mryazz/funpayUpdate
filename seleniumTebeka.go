@@ -2,6 +2,7 @@ package SeleniumTebeka
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"time"
@@ -13,7 +14,7 @@ import (
 func FunpayUpdate(username string, password string) {
 
 	const (
-		chromeDriverPath = "./chromedriver"
+		chromeDriverPath = "./cmd/chromedriver"
 		port             = 8080
 	)
 	opts := []selenium.ServiceOption{
@@ -35,7 +36,7 @@ func FunpayUpdate(username string, password string) {
 		Args: []string{
 			"no-sandbox",
 			"ash-host-window-bounds", "1024x768",
-			// "headless",
+			"headless",
 			"disable-ios-password-suggestions",
 			"allow-cross-origin-auth-prompt",
 		},
@@ -94,7 +95,7 @@ func FunpayUpdate(username string, password string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	os.WriteFile("./Screenshot.jpg", screen, 0644)
+	ioutil.WriteFile("Screenshot.jpg", screen, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
